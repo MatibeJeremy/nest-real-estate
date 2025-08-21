@@ -1,0 +1,5 @@
+export enum UserTypes {
+  HOME_OWNER = 'HOME_OWNER',
+  CONTRACTOR = 'CONTRACTOR',
+  PROJECT_MANAGER = 'PROJECT_MANAGER',
+}
