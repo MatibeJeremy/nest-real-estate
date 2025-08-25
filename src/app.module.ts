@@ -7,9 +7,11 @@ import { BidsModule } from './bids/bids.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { MilestonesModule } from './milestones/milestones.module';
+import { HealthModule } from './utils/health.module';
 
 @Module({
   imports: [
+    HealthModule,
     UsersModule,
     ProjectsModule,
     BidsModule,
