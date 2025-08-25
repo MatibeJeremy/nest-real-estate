@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  userId    Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  role      UserTypes
+  // A homeowner can have multiple projects
+  ownedProjects Project[] @relation("Owned Projects")
+  // A contractor can have multiple bids
+  bidsMade       Bid[] @relation("Contractor Bids")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Bid {
+  bidId      Int      @id @default(autoincrement())
+  projectId  Int
+  project    Project @relation(fields: [projectId], references: [projectId])
+  contractorId Int
+  contractor User @relation("Contractor Bids", fields: [contractorId], references: [userId])
+  duration  String
+  price     Float
+  status     BidStatus @default(PENDING)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([projectId, contractorId])
+}
+
+model Project {
+  projectId   Int      @id @default(autoincrement())
+  title       String
+  description String?
+  location    String
+  // Owner of the project
+  ownerId     Int
+  owner       User     @relation("Owned Projects",fields: [ownerId], references: [userId])
+  bids        Bid[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Milestone Milestone[]
+}
+
+model Milestone {
+  milestoneId Int      @id @default(autoincrement())
+  projectId   Int
+  project     Project @relation(fields: [projectId], references: [projectId])
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum UserTypes {
+  HOME_OWNER
+  CONTRACTOR
+  PROJECT_MANAGER
+}
+
+enum BidStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
