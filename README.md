@@ -61,8 +61,7 @@ $docker compose build && docker compose up
 ```
 
 - For API documentation, visit:
-
-- `localhost:8000/api`
+`localhost:8000/api`
 
 ## Database ER Diagram
 
