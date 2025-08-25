@@ -60,7 +60,8 @@ $prisma generate
 $docker compose build && docker compose up
 ```
 
-- For API documentation, visit:
+#### 2. For API documentation, visit:
+
 `localhost:8000/api`
 
 ## Database ER Diagram
