@@ -8,25 +8,25 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class MilestonesServiceImplementation extends MilestonesService {
   constructor(
     private readonly utils: Utils,
-    private readonly prismaService: PrismaService
+    private readonly prismaService: PrismaService,
   ) {
     super();
   }
   async create(
     createMilestoneDto: CreateMilestonesDto,
-    user: any
+    user: any,
   ): Promise<CreateMilestonesDto> {
-    await this.utils.validateUserPermissions(user, "PROJECT_MANAGER");
+    await this.utils.validateUserPermissions(user, 'PROJECT_MANAGER');
     return this.prismaService.milestone.create({
       data: {
         ...createMilestoneDto,
       },
-    })
+    });
   }
 
   findAll(user: any, projectId: string): Promise<CreateMilestonesDto[]> {
     return this.prismaService.milestone.findMany({
-      where:{projectId : Number(projectId)}
+      where: { projectId: Number(projectId) },
     });
   }
 }

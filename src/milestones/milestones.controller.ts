@@ -11,7 +11,7 @@ export class MilestonesController {
   @UseGuards(JwtAuthGuard)
   async create(
     @Body() createMilestoneDto: CreateMilestonesDto,
-    @CurrentUser() user: any
+    @CurrentUser() user: any,
   ): Promise<CreateMilestonesDto> {
     return await this.milestonesService.create(createMilestoneDto, user);
   }
@@ -20,7 +20,7 @@ export class MilestonesController {
   @UseGuards(JwtAuthGuard)
   async findAll(
     @Param('projectId') projectId: string,
-    @CurrentUser() user: any
+    @CurrentUser() user: any,
   ): Promise<CreateMilestonesDto[]> {
     return await this.milestonesService.findAll(user, projectId);
   }

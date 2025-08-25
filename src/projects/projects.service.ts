@@ -6,5 +6,5 @@ export abstract class ProjectsService {
     user: any,
   ): Promise<CreateProjectsDto>;
 
-  abstract findAll(user:any): Promise<any[]>;
+  abstract findAll(user: any): Promise<any[]>;
 }

@@ -4,10 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class Utils {
-  constructor(
-    private readonly prismaService: PrismaService
-  ) {
-  }
+  constructor(private readonly prismaService: PrismaService) {}
   async validateUserPermissions(user: LoginInterface, role: string) {
     const userDetails = await this.prismaService.user.findUnique({
       where: { email: user.email },

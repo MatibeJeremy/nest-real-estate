@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpCode,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -26,9 +25,7 @@ export class ProjectsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async findAll(
-    @CurrentUser() user: any
-  ): Promise<any[]> {
+  async findAll(@CurrentUser() user: any): Promise<any[]> {
     return await this.projectsService.findAll(user);
   }
 }

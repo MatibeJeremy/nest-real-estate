@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { CreateBidsDto } from './data/dto/create-bids.dto';
 import { BidsService } from './bids.service';
 import { JwtAuthGuard } from '../utils/jwt-auth.guard';
@@ -9,8 +9,9 @@ export class BidsController {
   constructor(private readonly bidsService: BidsService) {}
   @Post()
   @UseGuards(JwtAuthGuard)
-  async create(@Body() createBidDto: CreateBidsDto,
-  @CurrentUser() user: any,
+  async create(
+    @Body() createBidDto: CreateBidsDto,
+    @CurrentUser() user: any,
   ): Promise<CreateBidsDto> {
     return this.bidsService.create(createBidDto, user);
   }

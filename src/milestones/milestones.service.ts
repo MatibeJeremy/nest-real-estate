@@ -7,6 +7,6 @@ export abstract class MilestonesService {
   ): Promise<CreateMilestonesDto>;
   abstract findAll(
     user: any,
-    projectId: string
+    projectId: string,
   ): Promise<CreateMilestonesDto[]>;
 }
